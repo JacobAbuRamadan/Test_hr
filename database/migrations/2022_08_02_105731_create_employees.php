@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('birthday');
             $table->string('adress');
             $table->enum('status',['available','not_available'])-> default('available');
-            $table->integer('phone_num');
+            $table->string('phone_num');
             $table->string('personal_photo');
             $table->string('college_degree');
             $table->string('cv');

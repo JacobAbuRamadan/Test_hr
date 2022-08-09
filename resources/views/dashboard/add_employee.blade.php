@@ -19,17 +19,22 @@
                   <label class="form-label">Name</label>
                   <input type="text" class="form-control  @error('name') is-invalid @enderror " name="name" placeholder="Enter Employee Name">
                   @error('name')
-                    <span class="invalid-feedback">{{ $message }}</span>
-
-                  @enderror
+                  <span class="invalid-feedback">{{ $message }}</span>
+                @enderror
                 </div>
             <div class="mb-3">
               <label class="form-label">Employee Email</label>
-              <input type="text" class="form-control" name="email" placeholder="Enter Employee Email">
+              <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Enter Employee Email">
+              @error('email')
+              <span class="invalid-feedback">{{ $message }}</span>
+            @enderror
             </div>
               <label class="form-label">Employee password</label>
               <div class="Generate_password">
-                <input class="form-control" type="text" name="password" placeholder="Create password" id="password" readonly >
+                <input class="form-control @error('password') is-invalid @enderror" type="text" name="password" placeholder="Create password" id="password" readonly >
+                @error('password')
+                <span class="invalid-feedback">{{ $message }}</span>
+              @enderror
                     <div id="button" class="btn1"onclick="genPassword()">Generate</div>
             </div>
 
@@ -48,19 +53,32 @@
 
           <div class="mb-3">
             <label class="form-label">University</label>
-            <input type="text" class="form-control" name="university" placeholder="university name">
+            <input type="text" " name="university" class="form-control @error('university') is-invalid @enderror  placeholder="university name">
+            @error('university')
+            <span class="invalid-feedback">{{ $message }}</span>
+          @enderror
+
           </div>
           <div class="mb-3">
             <label class="form-label">Major</label>
-            <input type="text" class="form-control" name="major" placeholder="Major name">
+            <input type="text" class="form-control  @error('major') is-invalid @enderror" name="major" placeholder="Major name">
+            @error('major')
+            <span class="invalid-feedback">{{ $message }}</span>
+          @enderror
           </div>
           <div class="mb-3">
             <label class="form-label">Adress</label>
-            <input type="text" class="form-control" name="adress" placeholder="adress">
+            <input type="text" class="form-control @error('adress') is-invalid @enderror" name="adress" placeholder="adress">
+            @error('adress')
+            <span class="invalid-feedback">{{ $message }}</span>
+          @enderror
           </div>
           <div class="mb-3">
             <label class="form-label">Phone Num</label>
-            <input type="number" value="059" class="form-control" name="phone_num" placeholder="phone num">
+            <input type="number" value="059" class="form-control @error('phone_num') is-invalid @enderror " name="phone_num" placeholder="phone num">
+            @error('phone_num')
+            <span class="invalid-feedback">{{ $message }}</span>
+          @enderror
           </div>
 
           <div class="modal-body">
@@ -69,11 +87,17 @@
                 <div class="col-lg8">
                   <div class="mb-3">
                     <label class="form-label">Graduation Year</label>
-                    <input type="date" name="graduation_year" class="form-control">
+                    <input type="date" name="graduation_year" class="form-control  @error('graduation_year') is-invalid @enderror">
+                    @error('graduation_year')
+                    <span class="invalid-feedback">{{ $message }}</span>
+                  @enderror
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Birthday</label>
-                    <input type="date" name="birthday"  class="form-control">
+                    <input type="date" name="birthday"  class="form-control @error('birthday') is-invalid @enderror">
+                    @error('birthday')
+                    <span class="invalid-feedback">{{ $message }}</span>
+                  @enderror
                   </div>
                 </div>
 
@@ -83,15 +107,24 @@
 
           <div class="mb-3">
             <label class="form-label">Personal Photo</label>
-            <input type="file" class="form-control" name="personal_photo" >
+            <input type="file" class="form-control @error('personal_photo') is-invalid @enderror" name="personal_photo" >
+            @error('personal_photo')
+            <span class="invalid-feedback">{{ $message }}</span>
+          @enderror
           </div>
           <div class="mb-3">
             <label class="form-label">College Degree</label>
-            <input type="file" class="form-control" name="college_degree" >
+            <input type="file" class="form-control @error('college_degree') is-invalid @enderror" name="college_degree" >
+            @error('college_degree')
+            <span class="invalid-feedback">{{ $message }}</span>
+          @enderror
           </div>
           <div class="mb-3">
           <label class="form-label"> CV </label>
-            <input type="file" class="form-control" name="cv" >
+            <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv" >
+            @error('cv')
+            <span class="invalid-feedback">{{ $message }}</span>
+          @enderror
           </div>
 
 

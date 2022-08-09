@@ -46,15 +46,25 @@ class EmployeesController extends Controller
     public function store(Request $request)
     {
 
-
         $request->validate([
-
             'name'=>'required',
             'email'=>'required',
             'password'=>'required',
             'type'=>'required',
+            'university'=>'required',
+            'major'=>'required',
+            'graduation_year'=>'required',
+            'birthday'=>'required',
+            'adress'=>'required',
+            'status'=>'nullable' ,
+            'phone_num'=>'required|digits_between:9,15',
+            'personal_photo'=>'required|mimes:png,jpeg,jpg',
+            'college_degree'=>'required|mimes:png,jpeg,jpg',
+            'cv'=>'required|mimes:png,jpeg,jpg',
+
 
         ]);
+
 
         $user = User::create([
             'name' => $request->name,
@@ -66,22 +76,7 @@ class EmployeesController extends Controller
 
 
 
-        $request->validate([
 
-            'university'=>'required',
-            'major'=>'required',
-            'graduation_year'=>'required',
-            'birthday'=>'required',
-            'adress'=>'required',
-            'status'=>'nullable' ,
-            'phone_num'=>'required',
-            'personal_photo'=>'required|mimes:png,jpeg,jpg',
-            'college_degree'=>'required|mimes:png,jpeg,jpg',
-            'cv'=>'required|mimes:png,jpeg,jpg',
-
-            //|cv|mimes:pdf
-            // |personal_photo|mimes:png,jpg,svg
-        ]);
 
 
         $new_personal_photo=rand().rand()."_" .$request ->file('personal_photo')->getClientOriginalName();
