@@ -24,8 +24,8 @@ use App\Http\Controllers\DashboardsController;
 Route::resource('employees', EmployeesController::class)->Middleware(['auth','check_user']);
 
 
-route::get('/dashboard', [DashboardsController::class,'index'])->name('dashboard');
 
+route::get('/dashboard', [DashboardsController::class,'index'])->name('dashboard');
 route::get('/user', [DashboardsController::class,'getUser'])->name('get.users');
 
 

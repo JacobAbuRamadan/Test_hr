@@ -1,7 +1,5 @@
 @section('add_content')
 
-
-
 <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -47,13 +45,11 @@
           </div>
         </div>
 
-
-
-
+        <input type="text" name="role_id" value="3" hidden>
 
           <div class="mb-3">
             <label class="form-label">University</label>
-            <input type="text" " name="university" class="form-control @error('university') is-invalid @enderror  placeholder="university name">
+            <input type="text"  name="university" class="form-control @error('university') is-invalid @enderror"  placeholder="university name">
             @error('university')
             <span class="invalid-feedback">{{ $message }}</span>
           @enderror

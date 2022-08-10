@@ -10,6 +10,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\File as FacadesFile;
+use Illuminate\Support\Facades\Gate;
 
 class EmployeesController extends Controller
 {
@@ -20,9 +21,10 @@ class EmployeesController extends Controller
      */
     public function index()
     {
+            Gate::authorize('employees.show');
 
             $Employees = Employee::all();
-            $users =User::select(['id','name'])->get();
+            $users =User::select(['id','name','type'])->get();
             return view('dashboard.employee_form',compact('Employees','users'));
     }
 
@@ -33,6 +35,8 @@ class EmployeesController extends Controller
      */
     public function create()
     {
+        Gate::authorize('employees.create');
+
         return view('dashboard.employee_form');
 
     }
@@ -45,12 +49,29 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->type == 'hr') {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password'=>Hash::make($request->password),
+                'type' => $request->type,
+                'role_id' => $request->role_id,
+            ]);
+            $name=$request->name;
+            $email=$request->email;
+            $password=$request->password;
 
+            Mail::to($email)->send(new UserPass($name,$email,$password));
+
+           return redirect()-> back()->with('msg','The HR has been added and the email has been sent successfully');
+
+        }
         $request->validate([
             'name'=>'required',
             'email'=>'required',
             'password'=>'required',
             'type'=>'required',
+            'role_id'=>'required',
             'university'=>'required',
             'major'=>'required',
             'graduation_year'=>'required',
@@ -66,11 +87,14 @@ class EmployeesController extends Controller
         ]);
 
 
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password'=>Hash::make($request->password),
             'type' => $request->type,
+            'role_id' => $request->role_id,
+
 
         ]);
 
@@ -139,6 +163,7 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('employees.edit');
         $users =  User::all();
         $Employees =  Employee::findOrFail($id);
 
@@ -249,6 +274,7 @@ class EmployeesController extends Controller
 
     public function destroy($id)
     {
+        Gate::authorize('employees.destroy');
 
 
         $Employees = Employee::find($id);
@@ -273,7 +299,6 @@ class EmployeesController extends Controller
         return redirect()->back()->with('dmsg','The Employee Deleted successfully');
 
     }
-
 
 
 

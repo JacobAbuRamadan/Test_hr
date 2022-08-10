@@ -1,4 +1,5 @@
 @extends('pages._layouts.dashboard.master')
+@include('dashboard.add_hr')
 @include('dashboard.add_employee')
 
 
@@ -35,16 +36,28 @@
         <!-- Page title actions -->
         <div class="col-12 col-md-auto ms-auto d-print-none">
           <div class="btn-list">
-            {{-- <span class="d-none d-sm-inline">
-              <a href="#" class="btn btn-white">
-                Add HR
-              </a>
-            </span> --}}
-            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
+           @if (Auth::user()->type == 'super-admin')
+
+           <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report2">
+            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+            Add HR
+
+          </a>
+          </span>
+@yield('add_hr_content')
+
+           @endif
+
+
+
+           @if (Auth::user()->type == 'hr')
+           <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">
               <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
               <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
               Add New Employee
             </a>
+            @endif
             <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
               <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
               <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
@@ -61,20 +74,31 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex align-items-center">
-                <div class="subheader">Employees Count</div>
+                <div class="subheader">Users Count</div>
                 <div class="ms-auto lh-1">
                   <div class="dropdown">
 
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item active" href="#">Last 7 days</a>
-                      <a class="dropdown-item" href="#">Last 30 days</a>
-                      <a class="dropdown-item" href="#">Last 3 months</a>
-                    </div>
+
                   </div>
                 </div>
               </div>
 
-      <div class="h1 mb-3">  {{ $EmployeeCount = count($Employees) .' Employees'; }}</div>
+    @if (Auth::user()->type == 'super-admin')
+      <div class="h1 mb-2">  {{ $UsersCount = count($users) .' Users'; }}</div>
+
+      {{-- {{ $users= $users->type=='hr'; }} --}}
+
+      <div class="h1 mb-2">  {{ $HRCount = count($users) .' HR'; }}</div>
+    @endif
+      {{-- ->type =='hr' --}}
+
+      <div class="h1 mb-2">  {{ $EmployeeCount = count($Employees) .' Employees'; }}</div>
+
+
+
+
+
+
               <div class="d-flex mb-2">
                 <div class="ms-auto">
 
