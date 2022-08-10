@@ -96,9 +96,6 @@
 
 
 
-
-
-
               <div class="d-flex mb-2">
                 <div class="ms-auto">
 
@@ -114,13 +111,152 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @if (Auth::user()->type == 'super-admin')
+
+
+        <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+
+
+
+                <h3 class="card-title">Users Table</h3>
+              </div>
+              <div class="card-body border-bottom py-3">
+                <div class="d-flex">
+                  <div class="text-muted">
+                    Show
+                    <div class="mx-2 d-inline-block">
+                      <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
+                    </div>
+                    entries
+                  </div>
+                  <div class="ms-auto text-muted">
+                    Search:
+                    <div class="ms-2 d-inline-block">
+                      <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap datatable">
+                  <thead>
+                    <tr>
+
+                      <th class="w-1"><input  class="select_all" type="checkbox" id="select_all" aria-label="Select all invoices"></th>
+
+
+                      <th class="w-1">No. <!-- Download SVG icon from http://tabler-icons.io/i/chevron-up -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm text-dark icon-thick" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="6 15 12 9 18 15" /></svg>
+                      </th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Type</th>
+                      <th>Actions</th>
+
+
+                    </tr>
+                  </thead>
+
+
+
+
+                    @foreach ($users as $user)
+                    <tr>
+                      <td><input  class="select_item" type="checkbox" name="select_item" aria-label="Select invoice" value="{{$user->id}}"></td>
+
+                      <td><span class="text-muted">{{$user->id}}</span></td>
+                      {{-- <td><a href="#" class="text-reset" tabindex="-1">
+
+                  </a>
+                </td> --}}
+
+                      <td>
+                        {{$user->name}}
+                      </td>
+                      <td>
+                        {{$user->email}}
+
+                      </td>
+                      <td>
+                        {{$user->type}}
+
+                      </td>
+
+                      <td  class="text-end">
+                        <span @if ($user->type!=='hr')
+                            hidden
+                          @endif class="dropdown">
+                          <button  class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                          <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="{{ route('employees.edit',$user->id) }}">
+                              Edit
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <form  action="{{ route('employees.destroy',$user->id) }}" method="POST" >
+                                    @csrf
+                                    @method('delete')
+                                    <button onclick="return confirm('Are you sure ?')" class="dropdown-item">Delete</button>
+                                </form>
+                            </a>
+                          </div>
+                        </span>
+                      </td>
+
+                      @endforeach
+
+                </table>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+@endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="col-12">
           <div class="card">
             <div class="card-header">
 
 
 
-              <h3 class="card-title">Invoices</h3>
+              <h3 class="card-title">Employees Table</h3>
             </div>
             <div class="card-body border-bottom py-3">
               <div class="d-flex">

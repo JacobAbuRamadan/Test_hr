@@ -24,7 +24,7 @@ class EmployeesController extends Controller
             Gate::authorize('employees.show');
 
             $Employees = Employee::all();
-            $users =User::select(['id','name','type'])->get();
+            $users =User::all();
             return view('dashboard.employee_form',compact('Employees','users'));
     }
 
@@ -163,6 +163,8 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
+
+
         Gate::authorize('employees.edit');
         $users =  User::all();
         $Employees =  Employee::findOrFail($id);
@@ -186,6 +188,8 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
         $request->validate([
 
             'university'=>'required',
@@ -274,7 +278,23 @@ class EmployeesController extends Controller
 
     public function destroy($id)
     {
+
+        // $hr = User::where('type','hr')->get();
+        // if($hr=$id){
+        //     $hr = User::where('type','hr')->get();
+        //     if($hr->id =$id){
+        //     $users = User::find($id);
+
+        //         dd($id);
+        //     $users->delete();
+        //     return redirect()->back()->with('dmsg','The HR Deleted successfully');
+
+        //          }
+        // }
+
+
         Gate::authorize('employees.destroy');
+
 
 
         $Employees = Employee::find($id);
