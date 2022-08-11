@@ -86,11 +86,14 @@
     @if (Auth::user()->type == 'super-admin')
       <div class="h1 mb-2">  {{ $UsersCount = count($users) .' Users'; }}</div>
 
-      {{-- {{ $users= $users->type=='hr'; }} --}}
+              {{-- @foreach ($users as $user)
+                  {{ $user->type=='hr' }}
+              @endforeach
+             {{ $user::where('type','hr')->get(); }}; --}}
 
       <div class="h1 mb-2">  {{ $HRCount = count($users) .' HR'; }}</div>
     @endif
-      {{-- ->type =='hr' --}}
+
 
       <div class="h1 mb-2">  {{ $EmployeeCount = count($Employees) .' Employees'; }}</div>
 
@@ -118,13 +121,6 @@
 
 
 
-
-
-
-
-
-
-
         @if (Auth::user()->type == 'super-admin')
 
 
@@ -134,7 +130,7 @@
 
 
 
-                <h3 class="card-title">Users Table</h3>
+                <h3 class="card-title">Employees Table</h3>
               </div>
               <div class="card-body border-bottom py-3">
                 <div class="d-flex">
@@ -177,6 +173,7 @@
 
 
                     @foreach ($users as $user)
+
                     <tr>
                       <td><input  class="select_item" type="checkbox" name="select_item" aria-label="Select invoice" value="{{$user->id}}"></td>
 
@@ -204,34 +201,54 @@
                           @endif class="dropdown">
                           <button  class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
                           <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="{{ route('employees.edit',$user->id) }}">
+                            <a class="dropdown-item" href="{{ route('admins.edit',$user->id) }}">
                               Edit
                             </a>
                             <a class="dropdown-item" href="#">
-                                <form  action="{{ route('employees.destroy',$user->id) }}" method="POST" >
+                                <form  action="{{ route('admins.destroy',$user->id) }}" method="POST" >
                                     @csrf
                                     @method('delete')
                                     <button onclick="return confirm('Are you sure ?')" class="dropdown-item">Delete</button>
                                 </form>
                             </a>
-                          </div>
-                        </span>
-                      </td>
+                        </div>
+                      </span>
+                    </td>
+                  </tr>
+                  @endforeach
 
-                      @endforeach
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer d-flex align-items-center">
 
-                </table>
+              <ul class="pagination m-0 ms-auto">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="15 6 9 12 15 18" /></svg>
+                    prev
+                  </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
 
+                <li class="page-item">
+                  <a class="page-link" href="#">
+                    next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9 6 15 12 9 18" /></svg>
+                  </a>
+                </li>
+              </ul>
 
-              </div>
+            </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </div>
-
-
-
 
 
 @endif

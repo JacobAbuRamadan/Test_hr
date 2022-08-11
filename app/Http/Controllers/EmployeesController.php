@@ -278,8 +278,12 @@ class EmployeesController extends Controller
 
     public function destroy($id)
     {
+        // $users = User::all();
 
         // $hr = User::where('type','hr')->get();
+        // dd($hr);
+
+
         // if($hr=$id){
         //     $hr = User::where('type','hr')->get();
         //     if($hr->id =$id){

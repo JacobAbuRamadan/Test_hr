@@ -7,11 +7,11 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">New Employee</h5>
+          <h5 class="modal-title">New HR</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form class="mt-4" action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
+        <form class="mt-4" action="{{ route('admins.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
           <div class="modal-body">
 
