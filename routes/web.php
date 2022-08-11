@@ -27,11 +27,11 @@ use App\Http\Controllers\DashboardsController;
 
 
 
-//for adding ,editing and delete Employees by Hr
+// for add,edit and delete employees by HR
 Route::resource('employees', EmployeesController::class)->Middleware(['auth','check_user']);
 
 
-//for adding ,editing and delete HR by Admin
+//for add,edit and delete HR by Admin
 Route::resource('admins', AdminsController::class)->Middleware(['auth','check_user']);
 
 
@@ -44,13 +44,13 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-// not allowed to register on this setuation
+// Registration is not allowed in this case at the moment
 Route::get('/register',function(){
     return redirect()->route('not.allowed');
 });
 
 
-//not allowed page
+//Not allowed page
 Route::get('not_allowed',function(){
    return view('errors.403'); })->name('not.allowed');
 
@@ -59,7 +59,7 @@ Route::get('not_allowed',function(){
 
 
 
-//just for test yajrabox datatable
+//just for testing yajrabox datatable
 
 // route::get('/dashboard', [DashboardsController::class,'index'])->name('dashboard');
 // route::get('/user', [DashboardsController::class,'getUser'])->name('get.users');
