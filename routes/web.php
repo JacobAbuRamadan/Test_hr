@@ -26,7 +26,6 @@ use App\Http\Controllers\DashboardsController;
 
 
 
-
 // for add,edit and delete employees by HR
 Route::resource('employees', EmployeesController::class)->Middleware(['auth','check_user']);
 
