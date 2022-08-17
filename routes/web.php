@@ -11,6 +11,7 @@ use App\Http\Controllers\YajrasController;
 use App\Http\Controllers\UserDataController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\DashboardsController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,17 +26,14 @@ use App\Http\Controllers\DashboardsController;
 
 
 
-
-// for add,edit and delete employees by HR
-Route::resource('employees', EmployeesController::class)->Middleware(['auth','check_user']);
-
-
-//for add,edit and delete HR by Admin
-Route::resource('admins', AdminsController::class)->Middleware(['auth','check_user']);
-
-
-//for showing Employee information
-Route::resource('/userdata', UserDataController::class)->middleware(['auth','check_user']);
+Route::group(['Middleware'=>'auth','check_user'],function(){
+    // // for add,edit and delete employees by HR
+    Route::resource('employees', EmployeesController::class);
+    // //for add,edit and delete HR by Admin
+    Route::resource('admins', AdminsController::class);
+// //for showing Employee information
+    Route::resource('/userdata', UserDataController::class);
+});
 
 
 // Auth routes
@@ -44,15 +42,11 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 
 // Registration is not allowed in this case at the moment
-Route::get('/register',function(){
-    return redirect()->route('not.allowed');
-});
-
+Route::redirect('/register', '/not_allowed',);
 
 //Not allowed page
-Route::get('not_allowed',function(){
-   return view('errors.403'); })->name('not.allowed');
 
+   Route::view('/not_allowed', 'errors.403')->name('not.allowed');
 
 
 

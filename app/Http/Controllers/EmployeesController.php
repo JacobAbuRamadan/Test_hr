@@ -82,11 +82,7 @@ class EmployeesController extends Controller
             'personal_photo'=>'required|mimes:png,jpeg,jpg',
             'college_degree'=>'required|mimes:png,jpeg,jpg',
             'cv'=>'required|mimes:png,jpeg,jpg',
-
-
         ]);
-
-
 
         $user = User::create([
             'name' => $request->name,
